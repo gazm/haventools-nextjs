@@ -4,6 +4,7 @@ import Nav from './header';
 import Footer from './footer';
 
 const Layout = props => (
+    <body>
     <div className="wrapper fluid">
         <Head>
             <title>Haven Tools</title>
@@ -17,4 +18,5 @@ const Layout = props => (
         
         <Footer />
     </div>
+    </body>
 );
