@@ -29,19 +29,7 @@ showNode();
 
 const Index = () => 
   <Layout>
-    <body className="text-center">
-      <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <header className="masthead mb-auto">
-          <div className="inner">
-            <h3 className="masthead-brand">Haven Tools</h3>
-            <nav className="nav nav-masthead justify-content-center">
-              <a className="nav-link active" href="#">
-                Home
-              </a>
-            </nav>
-          </div>
-        </header>
-
+  
         <main role="main" className="inner cover">
           <h1 className="cover-heading">Consider a Donation.</h1>
           <p className="lead">
@@ -63,15 +51,7 @@ const Index = () =>
             </div>
           </div>
         </main>
-        
-        <footer className="mastfoot mt-auto">
-          <div className="inner">
-            <p>Haven Tools</p>
-          </div>
-        </footer>
-        
-      </div>
-    </body>
+  
   </Layout>
 
 export default Index;
