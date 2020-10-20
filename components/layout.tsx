@@ -8,5 +8,13 @@ const Layout = props => (
         <Head>
             <title>Haven Tools</title>
         </Head>
+        
+        <Header />
+        
+        <div className="content" style={contentStyle}>
+        {props.children}
+        </div>
+        
+        <Footer />
     </div>
 );
