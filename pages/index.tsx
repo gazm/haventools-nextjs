@@ -1,8 +1,6 @@
-import { Main } from "next/document";
-import Head from "next/head";
+import Layout from '../components/Layout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function Home() {
   async function getNode() {
     let url = 'http://localhost:3001/api/node';
     try {
@@ -28,7 +26,9 @@ async function showNode() {
     }
 }
 showNode();
-  return (
+
+const Index = () => 
+  <Layout>
     <body className="text-center">
       <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header className="masthead mb-auto">
@@ -72,5 +72,6 @@ showNode();
         
       </div>
     </body>
-  );
-}
+  </Layout>
+
+export default Index;
