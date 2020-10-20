@@ -1,4 +1,5 @@
 const header = () => (
+  <body>
   <header className="masthead mb-auto">
     <div className="inner">
       <h3 className="masthead-brand">Haven Tools</h3>
