@@ -4,6 +4,7 @@ const footer = () => (
       <p>Haven Tools</p>
     </div>
   </footer>
+  </body>
 );
 
 export default footer;
