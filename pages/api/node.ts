@@ -8,12 +8,11 @@ async function nodeInfo() {
     const response = await daemon.getInfo();
     return response;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
   res.statusCode = 200;
-  nodeInfo().then(
-    info => res.json(info));
+  nodeInfo().then((info) => res.json(info));
 };
