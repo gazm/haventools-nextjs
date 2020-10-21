@@ -1,22 +1,21 @@
 import Head from 'next/head';
-
-import Nav from './header';
+import Header from './header';
 import Footer from './footer';
 
 const Layout = props => (
-    <body>
-    <div className="wrapper fluid">
+    <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <Head>
             <title>Haven Tools</title>
         </Head>
         
         <Header />
         
-        <div className="content" style={contentStyle}>
+        <div className="content">
         {props.children}
         </div>
         
         <Footer />
     </div>
-    </body>
 );
+
+export default Layout;
