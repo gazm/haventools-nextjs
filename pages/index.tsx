@@ -1,4 +1,4 @@
-import Layout from '../components/Layout';
+import Layout from '../components/layout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
   async function getNode() {
@@ -30,7 +30,7 @@ showNode();
 const Index = () => 
   <Layout>
   
-        <main role="main" className="inner cover">
+        <main role="main" className="inner cover text-center">
           <h1 className="cover-heading">Consider a Donation.</h1>
           <p className="lead">
             This node is ran independently in my spare time for the community
@@ -40,8 +40,8 @@ const Index = () =>
           <div className="haven-address" id="copy">
             hvxyBX4KhU2Scs5MxrZPcBFSFar4fydA487493gEUrhw1qk8igYrfmtE8hoRihqeqQejQHrusk6dFHhzviRmkTPj2szEMdkiqA
           </div>
-          <div className="lead node-link">node.haven.tools:17750</div>
-          <div className="lead status">
+          <div className="node-link">node.haven.tools:17750</div>
+          <div className="status">
             <div className="available server-up float-left" id="node-connection">
               <FontAwesomeIcon icon="circle" />
               <span id="server-status"></span>
