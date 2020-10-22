@@ -1,17 +1,10 @@
 import Layout from "../components/layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import getNode from "../components/fetch";
 
-async function getNode() {
-  let url = "http://localhost:3001/api/node";
-  try {
-    let res = await fetch(url);
-    return await res.json();
-  } catch (error) {
-    console.error(error);
-  }
-}
 async function showNode() {
-  let nodeInfo = await getNode();
+  let nodeInfo = getNode();
+  console.log(nodeInfo);
   document.getElementById("block-height-number").innerHTML =
     nodeInfo.state.height;
   if (nodeInfo.state.isOffline === true) {
@@ -20,7 +13,7 @@ async function showNode() {
     x.classList.add("server-down");
     document.getElementById("server-status").innerHTML = " Server is Down";
   } else {
-    let x = document.getElementById("node-connection");
+    let x = document.getElemSentById("node-connection");
     x.classList.remove("server-down");
     x.classList.add("server-up");
     document.getElementById("server-status").innerHTML = " Server is Up";
