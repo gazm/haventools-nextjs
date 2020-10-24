@@ -1,25 +1,45 @@
 import react, { useEffect, useState } from "react";
-import havenjs from "haven-wallet-core";
+import axios from "axios";
 
-const getNode = async () => {
-  let url = "http://localhost:3001/api/node";
+// Vanilla JS Fetch
+
+async function getNode() {
+  const url = "/api/node";
   try {
-    let res = await fetch(url);
-    return await res.json();
+    const result = await axios(url);
+    // console.log(result);
+    return result;
   } catch (error) {
     console.error(error);
   }
-};
-
-function rpcReg(query) {
-  const [Data, setData] = useState([]);
-
-  useEffect(() => {
-    let daemon = havenjs.connectToDaemonRpc("http://node.haven.tools:17750");
-    const response = await daemon.getInfo();
-    setData(response);
-  });
-  return;
 }
+
+// Axios
+
+// async function getNode() {
+//   try {
+//     const result = await axios.get("/api/node");
+//     const { data } = result;
+//     return data;
+//     //console.log(data.state);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+
+// React Hooks
+// function getNode() {
+//   const [data, setData] = useState();
+
+//   useEffect(() => {
+//     const getData = async () => {
+//       const result = await axios("/api/node");
+//       setData(result.data);
+//     };
+//     getData();
+//   }, []);
+
+//   return { data };
+// }
 
 export default getNode;
