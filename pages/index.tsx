@@ -1,7 +1,6 @@
 import Layout from "../components/layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import fetchRPC from "../components/fetch";
-import { useEffect, useState } from "react";
 
 const Index = () => {
   function BlockHeight() {
@@ -12,7 +11,12 @@ const Index = () => {
 
   function ServerStatus() {
     const { rpcData, isLoading } = fetchRPC("get_info");
-    if (isLoading) return <FontAwesomeIcon icon="circle-notch" fa-spin />;
+    if (isLoading)
+      return (
+        <div className="server-up float-left" id="node-connection">
+          <FontAwesomeIcon icon="circle-notch" fa-spin />
+        </div>
+      );
     if (rpcData.result.status === "OK") {
       return (
         <div className="server-up float-left" id="node-connection">
