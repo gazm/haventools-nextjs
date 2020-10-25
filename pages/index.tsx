@@ -1,28 +1,33 @@
 import Layout from "../components/layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import getNode from "../components/fetch";
+import fetchRPC from "../components/fetch";
 import { useEffect, useState } from "react";
 
 const Index = () => {
-  const [blockchain, setData] = useState([]);
-  const [load, setLoad] = useState(false);
+  function BlockHeight() {
+    const { rpcData, isLoading } = fetchRPC("get_info");
+    if (isLoading) return <FontAwesomeIcon icon="circle-notch" fa-spin />;
+    return <span>{JSON.stringify(rpcData.result.height)}</span>;
+  }
 
-  useEffect(() => {
-    getNode().then((res) => {
-      setData(res.data.state);
-      setLoad(true);
-    });
-  }, []);
-
-  let statusMsg;
-  let statusClass;
-
-  if (blockchain.isOffline === false) {
-    statusMsg = " Node Connected";
-    statusClass = "server-up available float-left";
-  } else {
-    statusMsg = " Node is down";
-    statusClass = "server-down available float-left";
+  function ServerStatus() {
+    const { rpcData, isLoading } = fetchRPC("get_info");
+    if (isLoading) return <FontAwesomeIcon icon="circle-notch" fa-spin />;
+    if (rpcData.result.status === "OK") {
+      return (
+        <div className="server-up float-left" id="node-connection">
+          <FontAwesomeIcon icon="circle" />
+          <span id="server-status"> Node is connected</span>
+        </div>
+      );
+    } else {
+      return (
+        <div className="server-down float-left" id="node-connection">
+          <FontAwesomeIcon icon="circle" />
+          <span id="server-status"> Node is down</span>
+        </div>
+      );
+    }
   }
 
   return (
@@ -39,14 +44,11 @@ const Index = () => {
         </div>
         <div className="node-link">node.haven.tools:17750</div>
         <div className="status">
-          <div className={statusClass} id="node-connection">
-            <FontAwesomeIcon icon="circle" />
-            <span id="server-status">{statusMsg}</span>
-          </div>
+          <ServerStatus />
           <div className="block-height float-right">
             Block Height:{" "}
             <span id="block-height-number">
-              {JSON.stringify(blockchain.height)}
+              <BlockHeight />
             </span>
           </div>
         </div>
