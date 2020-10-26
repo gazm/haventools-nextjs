@@ -1,7 +1,7 @@
 import Layout from "../components/layout";
 
 const style = {
-  TextAlign: "center",
+  textAlign: "center",
   fontSize: "1.5em",
 };
 
