@@ -11,4 +11,16 @@ function fetchRPC(query) {
   };
 }
 
-export default fetchRPC;
+function fetchCGinfo(token) {
+  const { data, error } = useSWR(
+    `https://api.coingecko.com/api/v3/coins/${token}?localization=false&tickers=false&community_data=false&developer_data=false`,
+    axioFetch
+  );
+  return {
+    cgInfo: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+}
+
+export { fetchRPC, fetchCGinfo };
