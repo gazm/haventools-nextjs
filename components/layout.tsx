@@ -15,7 +15,7 @@ const bgStyle = {
 };
 
 const blur = {
-  backdropFilter: "blur(30px) brightness(0.8)",
+  backdropFilter: "blur(40px) brightness(0.8)",
   padding: "2em",
   borderRadius: "1em",
   //   border: "5px #fff",

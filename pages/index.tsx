@@ -1,46 +1,45 @@
 import Layout from "../components/layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import fetchRPC from "../components/fetch";
+import { fetchRPC } from "../components/fetch";
 
+function BlockHeight() {
+  const { rpcData, isLoading, isError } = fetchRPC("get_info");
+  if (isError) return <span className="server-down"> Error!</span>;
+  if (isLoading) return <FontAwesomeIcon icon="circle-notch" spin />;
+  return <span>{JSON.stringify(rpcData.result.height)}</span>;
+}
+
+function ServerStatus() {
+  const { rpcData, isLoading, isError } = fetchRPC("get_info");
+  if (isError)
+    return (
+      <span className="server-down">
+        <FontAwesomeIcon icon="circle" /> Error!
+      </span>
+    );
+  if (isLoading)
+    return (
+      <div className="server-up col p-1 text-left" id="node-connection">
+        <FontAwesomeIcon icon="circle-notch" spin />
+      </div>
+    );
+  if (rpcData.result.status === "OK") {
+    return (
+      <div className="server-up col p-1 text-left" id="node-connection">
+        <FontAwesomeIcon icon="circle" />
+        <span id="server-status"> Node is connected</span>
+      </div>
+    );
+  } else {
+    return (
+      <div className="server-down col p-1 text-left" id="node-connection">
+        <FontAwesomeIcon icon="circle" />
+        <span id="server-status"> Node is down</span>
+      </div>
+    );
+  }
+}
 const Index = () => {
-  function BlockHeight() {
-    const { rpcData, isLoading, isError } = fetchRPC("get_info");
-    if (isError) return <span className="server-down"> Error!</span>;
-    if (isLoading) return <FontAwesomeIcon icon="circle-notch" spin />;
-    return <span>{JSON.stringify(rpcData.result.height)}</span>;
-  }
-
-  function ServerStatus() {
-    const { rpcData, isLoading, isError } = fetchRPC("get_info");
-    if (isError)
-      return (
-        <span className="server-down">
-          <FontAwesomeIcon icon="circle" /> Error!
-        </span>
-      );
-    if (isLoading)
-      return (
-        <div className="server-up col p-1 text-left" id="node-connection">
-          <FontAwesomeIcon icon="circle-notch" spin />
-        </div>
-      );
-    if (rpcData.result.status === "OK") {
-      return (
-        <div className="server-up col p-1 text-left" id="node-connection">
-          <FontAwesomeIcon icon="circle" />
-          <span id="server-status"> Node is connected</span>
-        </div>
-      );
-    } else {
-      return (
-        <div className="server-down col p-1 text-left" id="node-connection">
-          <FontAwesomeIcon icon="circle" />
-          <span id="server-status"> Node is down</span>
-        </div>
-      );
-    }
-  }
-
   return (
     <Layout>
       <main role="main" className="inner cover text-center">
