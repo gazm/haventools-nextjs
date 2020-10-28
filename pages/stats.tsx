@@ -1,8 +1,12 @@
 import Layout from "../components/layout";
 import { fetchRPC, fetchCGinfo } from "../components/fetch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
+
+/* Fetch Functions */
 
 function getCGinfo(data: string) {
+  let result;
   //data=location of object as string ex.(".market_data.current_price.usd")
   const { cgInfo, isLoading, isError } = fetchCGinfo("haven");
   if (isError) return <h3 className="text-danger">🚨Error fetching data🚨</h3>;
@@ -12,12 +16,23 @@ function getCGinfo(data: string) {
         <FontAwesomeIcon icon="circle-notch" spin />
       </h3>
     );
-  if (data === ".market_data.current_price.usd") {
+  if (data === ".market_data.current_price.usd")
     return (
-      <span>$ {cgInfo.market_data.current_price.usd.toLocaleString()}</span>
+      <span className="xhv-price">
+        💲 {cgInfo.market_data.current_price.usd.toLocaleString()}
+      </span>
     );
+  if (data === ".market_data.market_cap.usd")
+    return <span>💲 {cgInfo.market_data.market_cap.usd.toLocaleString()}</span>;
+  if (data === "price_change") {
+    result = {
+      "24h": +cgInfo.market_data.price_change_percentage_24h.toFixed(2),
+      "7d": +cgInfo.market_data.price_change_percentage_7d.toFixed(2),
+      "30d": +cgInfo.market_data.price_change_percentage_30d.toFixed(2),
+    };
+    return JSON.stringify(result);
   } else {
-    return <span>$ {cgInfo.market_data.market_cap.usd.toLocaleString()}</span>;
+    return console.error("Try a different paramater");
   }
 }
 
@@ -35,25 +50,52 @@ function getSupply(asset) {
   );
   return (
     <span className={asset}>
-      $ {Math.round(result.amount / 1000000000000).toLocaleString()}
+      💲 {Math.round(result.amount / 1000000000000).toLocaleString()}
     </span>
   );
 }
 
 /* Components */
 
-function SmallCard(props: string) {
+function SmallCard(props) {
   return (
     <div className="small-card col-sm" style={smallCard}>
       <div className="card" style={card}>
         <div className="card-header" style={cardHeader}>
           {props.title}
         </div>
-        <div className="card-body">{props.data}</div>
+        <div className="card-body">{props.children}</div>
       </div>
     </div>
   );
 }
+
+const stats = () => (
+  <Layout>
+    <div style={style}>
+      <div className="row">
+        <SmallCard title="XHV Price">
+          <OverlayTrigger
+            overlay={
+              <Tooltip id="tooltip-disabled">
+                {getCGinfo("price_change")}
+              </Tooltip>
+            }
+          >
+            <span>{getCGinfo(".market_data.current_price.usd")}</span>
+          </OverlayTrigger>
+        </SmallCard>
+        <SmallCard title="MarketCap">
+          <span>{getCGinfo(".market_data.market_cap.usd")}</span>
+        </SmallCard>
+        <SmallCard title="xUSD Circulating">
+          <span>{getSupply("xUSD")}</span>
+        </SmallCard>
+      </div>
+      <div className="row"></div>
+    </div>
+  </Layout>
+);
 
 /* Styles */
 
@@ -79,23 +121,6 @@ const card = {
   backgroundColor: "#36393F",
 };
 
-const stats = () => (
-  <Layout>
-    <div style={style}>
-      <div className="row">
-        <SmallCard
-          title="XHV Price"
-          data={getCGinfo(".market_data.current_price.usd")}
-        />
-        <SmallCard
-          title="MarketCap"
-          data={getCGinfo(".market_data.market_cap.usd")}
-        />
-        <SmallCard title="xUSD Circulating" data={getSupply("xUSD")} />
-      </div>
-      <p className="mt-5">Under construction...</p>
-    </div>
-  </Layout>
-);
+/*   End Styles */
 
 export default stats;
