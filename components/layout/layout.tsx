@@ -1,8 +1,10 @@
 import Head from "next/head";
 import Header from "./header";
 import Footer from "./footer";
+import React from "react";
+import { BsPrefixPropsWithChildren } from "react-bootstrap/esm/helpers";
 
-let background = "/bg-crop.jpg";
+const background = "/bg-crop.jpg";
 
 const bgStyle = {
   backgroundImage: `url(${background})`,
@@ -11,19 +13,17 @@ const bgStyle = {
   backgroundSize: "cover",
   backgroundColor: "#333",
   backgroundPosition: "center",
-  position: "relative",
+  Position: "relative",
 };
 
 const blur = {
   backdropFilter: "blur(40px) brightness(0.8)",
   padding: "2em",
   borderRadius: "1em",
-  //   border: "5px #fff",
   boxShadow: "0 0 2rem rgba(0, 0, 0, 1)",
-  //   backgroundColor: "#26282C",
 };
 
-const Layout = (props) => (
+const Layout = (props: { children: JSX.Element }) => (
   <div className="bg" style={bgStyle}>
     <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <Head>

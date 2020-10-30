@@ -1,4 +1,4 @@
-import Layout from "../components/layout";
+import Layout from "../components/layout/layout";
 import { fetchRPC, fetchCGinfo } from "../components/fetch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,14 +9,13 @@ import {
   Col,
   Container,
 } from "react-bootstrap";
-import { useRef } from "react";
-import { redirect } from "next/dist/next-server/server/api-utils";
+import React from "react";
 
 // Charting
 
 /* Fetch Functions */
 
-function getCGinfo(data: string) {
+function getCGinfo(data: String) {
   //data=location of object as string ex.(".market_data.current_price.usd")
   const { cgInfo, isLoading, isError } = fetchCGinfo("haven");
 
@@ -68,7 +67,12 @@ function getSupply(asset) {
 
 /* Components */
 
-function ReactCard(props) {
+type CardProps = {
+  children: JSX.Element;
+  title: String;
+};
+
+function ReactCard(props: CardProps) {
   return (
     <Col sm style={smallCard}>
       <Card style={card}>
@@ -85,7 +89,7 @@ const stats = () => (
   <Layout>
     <Container className="text-center">
       <Row>
-        <ReactCard title="XHV Price" style={card}>
+        <ReactCard title="XHV Price">
           <OverlayTrigger
             overlay={
               <Tooltip id="tooltip-disabled">
@@ -98,11 +102,9 @@ const stats = () => (
           </OverlayTrigger>
         </ReactCard>
         <ReactCard title="MarketCap">
-          <span>{getCGinfo(".market_data.market_cap.usd")}</span>
+          {getCGinfo(".market_data.market_cap.usd")}
         </ReactCard>
-        <ReactCard title="xUSD Circulating">
-          <span>{getSupply("xUSD")}</span>
-        </ReactCard>
+        <ReactCard title="xUSD Circulating">{getSupply("xUSD")}</ReactCard>
       </Row>
       <Row></Row>
     </Container>
@@ -111,17 +113,12 @@ const stats = () => (
 
 /* Styles */
 
-const style = {
-  textAlign: "center",
-  fontSize: "1.5em",
-};
-
 const smallCard = {
   fontSize: "x-large",
 };
 
 const cardHeader = {
-  textAlign: "center",
+  TextAlign: "center",
   backgroundColor: "#26282C",
   padding: "0.25rem 1.25rem",
   fontSize: ".6em",

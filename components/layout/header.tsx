@@ -1,6 +1,7 @@
 import Link from "next/link";
+import React from "react";
 
-const header = () => (
+const Header = () => (
   <header className="masthead mb-auto">
     <div className="inner">
       <h3 className="masthead-brand">Haven Tools</h3>
@@ -16,4 +17,4 @@ const header = () => (
   </header>
 );
 
-export default header;
+export default Header;

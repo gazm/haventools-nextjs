@@ -1,4 +1,4 @@
-const footer = () => (
+const Footer = () => (
   <footer className="mastfoot mt-auto">
     <div className="inner text-center">
       <p>Haven Tools</p>
@@ -6,4 +6,4 @@ const footer = () => (
   </footer>
 );
 
-export default footer;
+export default Footer;

@@ -1,6 +1,7 @@
-import Layout from "../components/layout";
+import Layout from "../components/layout/layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchRPC } from "../components/fetch";
+import React from "react";
 
 function BlockHeight() {
   const { rpcData, isLoading, isError } = fetchRPC("get_info");
