@@ -22,4 +22,16 @@ function fetchCGinfo(token) {
   };
 }
 
-export { fetchRPC, fetchCGinfo };
+function cgPrice(days = 7) {
+  const { data, error } = useSWR(
+    `https://api.coingecko.com/api/v3/coins/haven/market_chart?vs_currency=usd&days=${days}&interval=daily`,
+    axiosFetch
+  );
+  return {
+    priceData: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+}
+
+export { fetchRPC, fetchCGinfo, cgPrice };
