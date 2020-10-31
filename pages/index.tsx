@@ -2,6 +2,7 @@ import Layout from "../components/layout/layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchRPC } from "../components/fetch";
 import React from "react";
+import { Snippet, Row } from "@geist-ui/react";
 
 function BlockHeight() {
   const { rpcData, isLoading, isError } = fetchRPC("get_info");
@@ -40,6 +41,7 @@ function ServerStatus() {
     );
   }
 }
+
 const Index = () => {
   return (
     <Layout>
@@ -50,9 +52,17 @@ const Index = () => {
           my own money. Please consider a donation to help cover costs for the
           domain, server and coffee.
         </p>
-        <div className="haven-address" id="copy">
-          hvxyBX4KhU2Scs5MxrZPcBFSFar4fydA487493gEUrhw1qk8igYrfmtE8hoRihqeqQejQHrusk6dFHhzviRmkTPj2szEMdkiqA
-        </div>
+        <Row>
+          <Snippet
+            className="xhr-address"
+            toastText="Address Copied!"
+            toastType="secondary"
+            text="hvxyBX4KhU2Scs5MxrZPcBFSFar4fydA487493gEUrhw1qk8igYrfmtE8hoRihqeqQejQHrusk6dFHhzviRmkTPj2szEMdkiqA"
+            width="100%"
+            type="secondary"
+            symbol=""
+          />
+        </Row>
         <div className="node-link h5">node.haven.tools:17750</div>
         <div className="status row">
           <ServerStatus />
