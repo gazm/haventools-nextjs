@@ -2,7 +2,8 @@ import Head from "next/head";
 import Header from "./header";
 import Footer from "./footer";
 import React from "react";
-import { BsPrefixPropsWithChildren } from "react-bootstrap/esm/helpers";
+import { GeistProvider } from "@geist-ui/react";
+import { GeistTheme } from "./theme";
 
 const background = "/bg-crop.jpg";
 
@@ -23,22 +24,24 @@ const blur = {
   boxShadow: "0 0 2rem rgba(0, 0, 0, 1)",
 };
 
-const Layout = (props: { children: JSX.Element }) => (
-  <div className="bg" style={bgStyle}>
-    <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-      <Head>
-        <title>Haven Tools</title>
-      </Head>
+const Layout = (props: { children: React.ReactNode }) => (
+  <GeistProvider theme={GeistTheme}>
+    <div className="bg" style={bgStyle}>
+      <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <Head>
+          <title>Haven Tools</title>
+        </Head>
 
-      <Header />
+        <Header />
 
-      <div className="content" style={blur}>
-        {props.children}
+        <div className="content" style={blur}>
+          {props.children}
+        </div>
+
+        <Footer />
       </div>
-
-      <Footer />
     </div>
-  </div>
+  </GeistProvider>
 );
 
 export default Layout;

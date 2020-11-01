@@ -1,28 +1,18 @@
 import Layout from "../components/layout/layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fetchRPC } from "../components/fetch";
+import { fetchRPC } from "../components/utils/fetch";
 import React from "react";
 import { Snippet, Row } from "@geist-ui/react";
-
-function BlockHeight() {
-  const { rpcData, isLoading, isError } = fetchRPC("get_info");
-  if (isError) return <span className="server-down"> Error!</span>;
-  if (isLoading) return <FontAwesomeIcon icon="circle-notch" spin />;
-  return <span>{JSON.stringify(rpcData.result.height)}</span>;
-}
+import { Loading, Error } from "../components/layout/theme";
+import { Blockchain } from "../components/data/blockchain";
 
 function ServerStatus() {
   const { rpcData, isLoading, isError } = fetchRPC("get_info");
-  if (isError)
-    return (
-      <span className="server-down">
-        <FontAwesomeIcon icon="circle" /> Error!
-      </span>
-    );
+  if (isError) return <Error />;
   if (isLoading)
     return (
       <div className="server-up col p-1 text-left" id="node-connection">
-        <FontAwesomeIcon icon="circle-notch" spin />
+        <Loading />
       </div>
     );
   if (rpcData.result.status === "OK") {
@@ -69,7 +59,7 @@ const Index = () => {
           <div className="block-height col p-1 text-right">
             Block Height:{" "}
             <span id="block-height-number">
-              <BlockHeight />
+              <Blockchain path="get_info" obj="height" />
             </span>
           </div>
         </div>
