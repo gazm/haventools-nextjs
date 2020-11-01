@@ -1,4 +1,5 @@
 import { ResponsiveLine } from "@nivo/line";
+import React from "react";
 
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
@@ -6,9 +7,16 @@ import { ResponsiveLine } from "@nivo/line";
 // website examples showcase many properties,
 // you'll often use just a few of them.
 
-const LineChart = ({ data /* see data tab */ }) => (
+const getData = async () => {
+  const url = "http://localhost:3001/api/chart";
+  const response = fetch(url);
+  console.log(response);
+  return response;
+};
+
+const LineChart = () => {
   <ResponsiveLine
-    data={data}
+    data={RawData}
     margin={{ top: 50, right: 60, bottom: 50, left: 60 }}
     xScale={{ type: "point" }}
     yScale={{
@@ -23,6 +31,7 @@ const LineChart = ({ data /* see data tab */ }) => (
     axisRight={null}
     axisBottom={{
       orient: "bottom",
+      format: "%H:%M",
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
@@ -50,7 +59,6 @@ const LineChart = ({ data /* see data tab */ }) => (
     areaOpacity={0.25}
     useMesh={true}
     legends={[]}
-  />
-);
-
+  />;
+};
 export default LineChart;
