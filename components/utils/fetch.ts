@@ -10,13 +10,13 @@ function fetchRPC(query) {
   };
 }
 
-function fetchCGinfo(token) {
+function cgInfo(token) {
   const { data, error } = useSWR(
     `https://api.coingecko.com/api/v3/coins/${token}?localization=false&tickers=false&community_data=false&developer_data=false`,
     axiosFetch
   );
   return {
-    cgInfo: data,
+    info: data,
     isLoading: !error && !data,
     isError: error,
   };
@@ -34,4 +34,4 @@ function cgPrice(days = 7) {
   };
 }
 
-export { fetchRPC, fetchCGinfo, cgPrice };
+export { fetchRPC, cgInfo, cgPrice };
