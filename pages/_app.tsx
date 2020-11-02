@@ -9,7 +9,7 @@ import React from "react";
 
 library.add(faCircle, faCircleNotch, faExclamationTriangle);
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
   return <Component {...pageProps} />;
 }
 
