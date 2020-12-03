@@ -4,10 +4,6 @@ import React from "react";
 import { nomValue } from "../utils/helpers";
 import { get } from "lodash";
 
-// { path, obj, curr}:{path:String, obj:String, curr?:String}
-//   { path }: { path: string },
-//   { obj }: { obj: string },
-//   { curr = "false" }: { curr?: string }
 export const Blockchain = ({
   path,
   obj,

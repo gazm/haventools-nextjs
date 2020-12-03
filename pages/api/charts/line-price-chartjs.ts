@@ -30,15 +30,17 @@ export default async function handler(
   const id = "XHV Price";
 
   let data = [];
+  let xAxis = [];
+  let yAxis = [];
 
   response.data.prices.forEach((row) => {
-    // const x = DateTime.fromMillis(row[0]).toISO();
-    const x = new Date(row[0]);
+    const x = DateTime.fromMillis(row[0]).toFormat("LLL dd");
     // const x = row[0];
     const y = row[1];
     // console.log(date, price);
-    data.push({ x, y });
+    xAxis.push({ x });
+    yAxis.push({ y });
   });
 
-  res.send([{ id, data }]);
+  res.send({ xAxis, yAxis });
 }

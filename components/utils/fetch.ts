@@ -21,7 +21,6 @@ function cgInfo(token) {
     isError: error,
   };
 }
-
 function cgPrice(days = 7) {
   const { data, error } = useSWR(
     `https://api.coingecko.com/api/v3/coins/haven/market_chart?vs_currency=usd&days=${days}&interval=daily`,

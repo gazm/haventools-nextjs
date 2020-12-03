@@ -12,6 +12,9 @@ const Header = () => (
         <Link href="stats">
           <a className="nav-link active">Stats</a>
         </Link>
+        <Link href="resources">
+          <a className="nav-link active">Resources</a>
+        </Link>
       </nav>
     </div>
   </header>
