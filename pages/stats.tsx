@@ -7,8 +7,6 @@ import { nomValue } from "../components/utils/helpers";
 import { usdSymbol, Loading, Error } from "../components/layout/theme";
 import { Coingecko } from "../components/data/coingecko";
 import { Blockchain } from "../components/data/blockchain";
-import { SupplyMap } from "../components/chart/TreeChart";
-import LineChart from "../components/chart/LineChart";
 
 /* Fetch Functions */
 // function getCGinfo(data) {
